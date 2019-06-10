@@ -22,13 +22,14 @@ public struct BoundView<Entity: ViewModel, Content: View>: View {
 
 /// A snapshot of the state of the view model bound with a `BoundView`.
 ///
-/// `StateSnapshot` forwards read accesses via the dot syntax to all properties of `state`. Bindings
-/// with writable properties of `state` can be constructed using `subscript(_:)` or `binding(for:)`.
-/// UI callbacks can flow back to the view model via `perform(_:)`.
+/// You can access any readable property of `state` by using the dot syntax directly on a
+/// `StateSnapshot`. To create bindings with writable properties of the state, use `subscript(_:)` or
+/// `binding(for:)`. For other kinds of UI callbacks, define them as an action of your view model, and
+/// send them through with `perform(_:)`.
 ///
-/// - important: The state contained in the snapshot never changes regardless of use of bindings or
-///              `perform(_:)`. These actions and mutations are delivered to the view model, which
-///              may change the state, leading to a new view update pass.
+/// - important: The state contained in the snapshot **never changes** regardless of the use of bindings
+///              or `perform(_:)` with the snapshot. The snapshot funnels actions and mutations back to
+///              the view model.
 @dynamicMemberLookup
 public struct StateSnapshot<Entity: ViewModel> {
     public let state: Entity.State
