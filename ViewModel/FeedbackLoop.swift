@@ -28,10 +28,10 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
         }
     }
 
-    public private(set) var state: State
+    @StatePublished public var state: State
 
     public let didChange: PassthroughSubject<Void, Never>
-    private let outputSubject: PassthroughSubject<Output, Never>
+    private let outputSubject: CurrentValueSubject<Output, Never>
     private let reduce: (inout State, Input) -> Void
 
     public init(
@@ -39,20 +39,18 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
         reduce: @escaping (inout State, Input) -> Void,
         feedbacks: [Feedback] = []
     ) {
-        self.state = initial
         self.reduce = reduce
         self.didChange = PassthroughSubject()
-        self.outputSubject = PassthroughSubject()
+        self.outputSubject = CurrentValueSubject(Output(state: initial, input: nil))
+        self.$state = .init(subject: outputSubject)
 
         _ = Publishers.MergeMany(
             feedbacks.map { $0.effects(AnyPublisher(outputSubject)) }
         )
         .sink { [weak self] event in
             guard let self = self else { return }
-            self.process(.event(event))
+            self.process(.event(event)) { _ in }
         }
-
-        outputSubject.send(Output(state: initial, input: nil))
     }
 
     deinit {
@@ -61,20 +59,40 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
     }
 
     public func perform(_ action: Action) {
-        mainThreadAssertion()
-        process(.action(action))
+        process(.action(action)) { _ in }
     }
 
     public func update<U>(_ value: U, for keyPath: WritableKeyPath<State, U>) {
-        mainThreadAssertion()
-        self.state[keyPath: keyPath] = value
-        process(.updated(keyPath))
+        process(.updated(keyPath)) {
+            $0[keyPath: keyPath] = value
+        }
     }
 
-    private func process(_ input: Input) {
-        reduce(&self.state, input)
-        outputSubject.send(Output(state: state, input: input))
+    private func process(_ input: Input, willReduce: (inout State) -> Void) {
+        mainThreadAssertion()
+
+        var state = outputSubject.value.state
+        willReduce(&state)
+        reduce(&state, input)
+        outputSubject.value = Output(state: state, input: input)
         didChange.send(())
+    }
+
+    @propertyDelegate
+    public struct StatePublished {
+        public var value: State {
+            _read { yield subject.value.state }
+        }
+
+        public var publisher: AnyPublisher<State, Never> {
+            return subject.map { $0.state }.eraseToAnyPublisher()
+        }
+
+        private let subject: CurrentValueSubject<Output, Never>
+
+        fileprivate init(subject: CurrentValueSubject<Output, Never>) {
+            self.subject = subject
+        }
     }
 }
 
