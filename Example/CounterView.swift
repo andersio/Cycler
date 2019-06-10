@@ -48,6 +48,19 @@ enum ViewLibrary {
                             )
                             .multilineTextAlignment(.trailing)
                         }
+
+                        HStack {
+                            Text("Last loaded")
+                            Spacer()
+                            Text((state.lastLoaded.map { "\($0)" } ?? "Never") as String)
+                                .multilineTextAlignment(.trailing)
+                        }
+
+                        Button(
+                            action: { state.perform(.pressedStart) },
+                            label: { Text("Refresh") }
+                        )
+
                     }
                 }.listStyle(.grouped)
             }
