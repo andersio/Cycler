@@ -78,58 +78,10 @@
             filePath = "ViewModel/FeedbackLoop.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "process(_:willReduce:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C7FEBCFC-9DE7-42C9-A5F1-B487EC6906F5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViewModel/FeedbackLoop.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "init(initial:reduce:feedbacks:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C7FEBCFC-9DE7-42C9-A5F1-B487EC6906F5 - 9992d3f5c7e52f44"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (B) -&gt; () in Cycler.FeedbackLoop.init(initial: A, reduce: (inout A, Cycler.FeedbackLoop&lt;A, B, C&gt;.Input) -&gt; (), feedbacks: Swift.Array&lt;Cycler.FeedbackLoop&lt;A, B, C&gt;.Feedback&gt;) -&gt; Cycler.FeedbackLoop&lt;A, B, C&gt;"
-                  moduleName = "Cycler"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/anders.ha/repos/Cycler/ViewModel/FeedbackLoop.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "340">
-               </Location>
-               <Location
-                  uuid = "C7FEBCFC-9DE7-42C9-A5F1-B487EC6906F5 - cf9b9b509e13d5d0"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (inout A) -&gt; () in closure #2 (B) -&gt; () in Cycler.FeedbackLoop.init(initial: A, reduce: (inout A, Cycler.FeedbackLoop&lt;A, B, C&gt;.Input) -&gt; (), feedbacks: Swift.Array&lt;Cycler.FeedbackLoop&lt;A, B, C&gt;.Feedback&gt;) -&gt; Cycler.FeedbackLoop&lt;A, B, C&gt;"
-                  moduleName = "Cycler"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/anders.ha/repos/Cycler/ViewModel/FeedbackLoop.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "execute()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

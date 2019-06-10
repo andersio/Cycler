@@ -31,18 +31,36 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
     @StatePublished public var state: State
 
     public let didChange: PassthroughSubject<Void, Never>
+
     private let outputSubject: CurrentValueSubject<Output, Never>
     private let reduce: (inout State, Input) -> Void
+
+    // NOTE: Beyond initialization, all inputs must be processed on `queue`.
+    private let queue: DispatchQueue
+    private let specificKey = DispatchSpecificKey<Void>()
 
     public init(
         initial: State,
         reduce: @escaping (inout State, Input) -> Void,
-        feedbacks: [Feedback] = []
+        feedbacks: [Feedback] = [],
+        usesMainQueue: Bool = true,
+        qos: DispatchQoS = .default
     ) {
         self.reduce = reduce
         self.didChange = PassthroughSubject()
         self.outputSubject = CurrentValueSubject(Output(state: initial, input: nil))
         self.$state = .init(subject: outputSubject)
+        self.queue = usesMainQueue
+            ? .main
+            : DispatchQueue(
+                label: "FeedbackLoop",
+                qos: qos,
+                attributes: [],
+                autoreleaseFrequency: .inherit,
+                target: nil
+            )
+
+        queue.setSpecific(key: specificKey, value: ())
 
         _ = Publishers.MergeMany(
             feedbacks.map { $0.effects(AnyPublisher(outputSubject)) }
@@ -56,6 +74,7 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
     deinit {
         outputSubject.send(completion: .finished)
         didChange.send(completion: .finished)
+        queue.setSpecific(key: specificKey, value: nil)
     }
 
     public func perform(_ action: Action) {
@@ -68,14 +87,20 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
         }
     }
 
-    private func process(_ input: Input, willReduce: (inout State) -> Void) {
-        mainThreadAssertion()
+    private func process(_ input: Input, willReduce: @escaping (inout State) -> Void) {
+        func execute() {
+            var state = outputSubject.value.state
+            willReduce(&state)
+            reduce(&state, input)
+            outputSubject.value = Output(state: state, input: input)
+            didChange.send(())
+        }
 
-        var state = outputSubject.value.state
-        willReduce(&state)
-        reduce(&state, input)
-        outputSubject.value = Output(state: state, input: input)
-        didChange.send(())
+        if DispatchQueue.getSpecific(key: specificKey) != nil {
+            execute()
+        } else {
+            queue.async(execute: execute)
+        }
     }
 
     @propertyDelegate
