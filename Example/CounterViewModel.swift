@@ -36,9 +36,9 @@ final class CounterViewModel: FeedbackLoop<CounterViewModel.State, CounterViewMo
                 }
             },
             feedbacks: [
-                .systemBootstrapped { Publishers.Just(.restoreCount(100)) },
+                .systemBootstrapped { Just(.restoreCount(100)) },
                 .positiveEdgeTrigger({ $0.state.isLoading }) { _ in
-                    return Publishers.Just(.loaded)
+                    return Just(.loaded)
                 }
             ]
         )

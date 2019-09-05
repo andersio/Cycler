@@ -30,7 +30,7 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
 
     @StatePublished public var state: State
 
-    public let didChange: PassthroughSubject<Void, Never>
+    public let objectWillChange: PassthroughSubject<Void, Never>
 
     private let outputSubject: CurrentValueSubject<Output, Never>
     private let reduce: (inout State, Input) -> Void
@@ -47,9 +47,10 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
         qos: DispatchQoS = .default
     ) {
         self.reduce = reduce
-        self.didChange = PassthroughSubject()
+        self.objectWillChange = PassthroughSubject()
         self.outputSubject = CurrentValueSubject(Output(state: initial, input: nil))
-        self.$state = .init(subject: outputSubject)
+        self._state = .init(subject: outputSubject)
+        
         self.queue = usesMainQueue
             ? .main
             : DispatchQueue(
@@ -73,7 +74,7 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
 
     deinit {
         outputSubject.send(completion: .finished)
-        didChange.send(completion: .finished)
+        objectWillChange.send(completion: .finished)
         queue.setSpecific(key: specificKey, value: nil)
     }
 
@@ -93,7 +94,7 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
             willReduce(&state)
             reduce(&state, input)
             outputSubject.value = Output(state: state, input: input)
-            didChange.send(())
+            objectWillChange.send()
         }
 
         if DispatchQueue.getSpecific(key: specificKey) != nil {
@@ -103,9 +104,9 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
         }
     }
 
-    @propertyDelegate
+    @propertyWrapper
     public struct StatePublished {
-        public var value: State {
+        public var wrappedValue: State {
             _read { yield subject.value.state }
         }
 

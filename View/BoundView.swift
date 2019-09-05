@@ -3,7 +3,7 @@ import Combine
 
 public struct BoundView<Entity: ViewModel, Content: View>: View {
     public let content: (StateSnapshot<Entity>) -> Content
-    @ObjectBinding private var viewModel: Entity
+    @ObservedObject private var viewModel: Entity
 
     public init(
         _ viewModel: Entity,
@@ -54,8 +54,8 @@ public struct StateSnapshot<Entity: ViewModel> {
 
     public func binding<U>(for keyPath: WritableKeyPath<Entity.State, U>) -> Binding<U> {
         return Binding(
-            getValue: { self.state[keyPath: keyPath] },
-            setValue: { self.entity?.update($0, for: keyPath) }
+            get: { self.state[keyPath: keyPath] },
+            set: { self.entity?.update($0, for: keyPath) }
         )
     }
 }
