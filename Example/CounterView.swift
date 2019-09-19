@@ -7,7 +7,7 @@ protocol CounterViewModelProtocol: ViewModel
 
 enum ViewLibrary {
     static func counter<ViewModel: CounterViewModelProtocol>(_ vm: ViewModel) -> some View {
-        return BoundView(vm) { state in
+        return BoundView(vm) { (state: StateSnapshot<ViewModel>) in
             VStack {
                 VStack {
                     Text(state.displayText)
@@ -25,7 +25,7 @@ enum ViewLibrary {
                             label: { Image(systemName: "plus.circle") }
                         )
                         Spacer()
-                        }.padding()
+                    }.padding()
                 }
 
                 List {
@@ -37,12 +37,11 @@ enum ViewLibrary {
                                 Text("Increment: \(state.increment)")
                             }
                         )
-
                         HStack {
                             Text("Format")
                             TextField(
-                                state.binding(for: \.format),
-                                placeholder: Text("%d"),
+                                "%d",
+                                text: state.binding(for: \.format),
                                 onEditingChanged: { _ in },
                                 onCommit: {}
                             )
@@ -60,9 +59,8 @@ enum ViewLibrary {
                             action: { state.perform(.pressedStart) },
                             label: { Text("Refresh") }
                         )
-
                     }
-                }.listStyle(.grouped)
+                }
             }
         }
     }

@@ -1,7 +1,6 @@
 import SwiftUI
-import Combine
 
-public protocol ViewModel: BindableObject {
+public protocol ViewModel: ObservableObject {
     associatedtype State
     associatedtype Action
 

@@ -30,7 +30,7 @@ extension FeedbackLoop {
                 return output
                     .map(transform)
                     .removeDuplicates()
-                    .map { $0.map(effect)?.eraseToAnyPublisher() ?? Publishers.Empty().eraseToAnyPublisher() }
+                    .map { $0.map(effect)?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher() }
                     .switchToLatest()
                     .eraseToAnyPublisher()
             }
@@ -52,7 +52,7 @@ extension FeedbackLoop {
                         case (false, true):
                             return effect(output).eraseToAnyPublisher()
                         case (true, false):
-                            return Publishers.Empty().eraseToAnyPublisher()
+                            return Empty().eraseToAnyPublisher()
                         case (false, false), (true, true):
                             return nil
                         }
