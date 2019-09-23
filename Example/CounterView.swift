@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import Cycler
 
 protocol CounterViewModelProtocol: ViewModel
     where State == CounterViewModel.State,
