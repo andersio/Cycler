@@ -2,8 +2,7 @@ import Combine
 import Foundation
 import Cycler
 
-final class CounterViewModel: FeedbackLoop<CounterViewModel.State, CounterViewModel.Event, CounterViewModel.Action> {
-
+final class CounterViewModel: FeedbackLoop<CounterViewModel.State, CounterViewModel.Event, CounterViewModel.Action>, CounterViewModelProtocol {
     init() {
         super.init(
             initial: State(currentCount: 10, increment: 1),

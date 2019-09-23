@@ -32,7 +32,7 @@ public struct BoundView<Entity: ViewModel, Content: View>: View {
 ///              the view model.
 @dynamicMemberLookup
 public struct StateSnapshot<Entity: ViewModel> {
-    public let state: Entity.ObjectWillChangePublisher
+    public let state: Entity.S
     public weak var entity: Entity?
 
     public init(state: Entity.S, entity: Entity) {
