@@ -38,6 +38,7 @@ open class FeedbackLoop<S, E, A>: ViewModel {
     // NOTE: Beyond initialization, all inputs must be processed on `queue`.
     private let queue: DispatchQueue
     private let specificKey = DispatchSpecificKey<Void>()
+    private var disposables = Set<AnyCancellable>()
 
     public init(
         initial: S,
@@ -63,13 +64,14 @@ open class FeedbackLoop<S, E, A>: ViewModel {
 
         queue.setSpecific(key: specificKey, value: ())
 
-        _ = Publishers.MergeMany(
+        Publishers.MergeMany(
             feedbacks.map { $0.effects(AnyPublisher(outputSubject)) }
         )
         .sink { [weak self] event in
             guard let self = self else { return }
             self.process(.event(event)) { _ in }
         }
+        .store(in: &disposables)
     }
 
     deinit {
