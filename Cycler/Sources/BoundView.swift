@@ -32,27 +32,27 @@ public struct BoundView<Entity: ViewModel, Content: View>: View {
 ///              the view model.
 @dynamicMemberLookup
 public struct StateSnapshot<Entity: ViewModel> {
-    public let state: Entity.State
+    public let state: Entity.S
     public weak var entity: Entity?
 
-    public init(state: Entity.State, entity: Entity) {
+    public init(state: Entity.S, entity: Entity) {
         self.state = state
         self.entity = entity
     }
 
-    public func perform(_ action: Entity.Action) {
+    public func perform(_ action: Entity.A) {
         entity?.perform(action)
     }
 
-    public subscript<U>(dynamicMember keyPath: KeyPath<Entity.State, U>) -> U {
+    public subscript<U>(dynamicMember keyPath: KeyPath<Entity.S, U>) -> U {
         get { return state[keyPath: keyPath] }
     }
 
-    public subscript<U>(keyPath: WritableKeyPath<Entity.State, U>) -> Binding<U> {
+    public subscript<U>(keyPath: WritableKeyPath<Entity.S, U>) -> Binding<U> {
         return binding(for: keyPath)
     }
 
-    public func binding<U>(for keyPath: WritableKeyPath<Entity.State, U>) -> Binding<U> {
+    public func binding<U>(for keyPath: WritableKeyPath<Entity.S, U>) -> Binding<U> {
         return Binding(
             get: { self.state[keyPath: keyPath] },
             set: { self.entity?.update($0, for: keyPath) }

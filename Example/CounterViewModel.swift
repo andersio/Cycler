@@ -1,20 +1,8 @@
 import Combine
 import Foundation
+import Cycler
 
 final class CounterViewModel: FeedbackLoop<CounterViewModel.State, CounterViewModel.Event, CounterViewModel.Action>, CounterViewModelProtocol {
-    struct State {
-        fileprivate(set) var currentCount: Int
-        var increment: Int = 1
-        var format: String = "%d"
-
-        var lastLoaded: Date?
-        var isLoading: Bool = false
-
-        var displayText: String {
-            return String(format: format, currentCount)
-        }
-    }
-
     init() {
         super.init(
             initial: State(currentCount: 10, increment: 1),
@@ -44,14 +32,27 @@ final class CounterViewModel: FeedbackLoop<CounterViewModel.State, CounterViewMo
         )
     }
 
-    public enum Event {
+    enum Event {
         case restoreCount(Int)
         case loaded
     }
 
-    public enum Action {
+    enum Action {
         case plus
         case minus
         case pressedStart
+    }
+    
+    struct State {
+        fileprivate(set) var currentCount: Int
+        var increment: Int = 1
+        var format: String = "%d"
+
+        var lastLoaded: Date?
+        var isLoading: Bool = false
+
+        var displayText: String {
+            return String(format: format, currentCount)
+        }
     }
 }

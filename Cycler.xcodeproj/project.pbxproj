@@ -14,14 +14,40 @@
 		65E47D7322ADB1E800A83B79 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65E47D7222ADB1E800A83B79 /* Preview Assets.xcassets */; };
 		65E47D7622ADB1E800A83B79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65E47D7422ADB1E800A83B79 /* LaunchScreen.storyboard */; };
 		65E47D8222ADBD4E00A83B79 /* CounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47D8122ADBD4E00A83B79 /* CounterViewModel.swift */; };
-		65E47D8822ADC54B00A83B79 /* FeedbackLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47D8722ADC54B00A83B79 /* FeedbackLoop.swift */; };
-		65E47D8A22ADEE7100A83B79 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47D8922ADEE7100A83B79 /* ViewModel.swift */; };
-		65E47D8C22ADF2F000A83B79 /* BoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47D8B22ADF2F000A83B79 /* BoundView.swift */; };
-		65E47D9122AEE16600A83B79 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47D9022AEE16600A83B79 /* Feedback.swift */; };
+		B2C4433F2338BE05006D7C3B /* Cycler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C443382338BE05006D7C3B /* Cycler.framework */; };
+		B2C443402338BE05006D7C3B /* Cycler.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2C443382338BE05006D7C3B /* Cycler.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B2C443462338BF32006D7C3B /* BoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47D8B22ADF2F000A83B79 /* BoundView.swift */; };
+		B2C443472338BF32006D7C3B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47D8922ADEE7100A83B79 /* ViewModel.swift */; };
+		B2C443482338BF32006D7C3B /* FeedbackLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47D8722ADC54B00A83B79 /* FeedbackLoop.swift */; };
+		B2C443492338BF32006D7C3B /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47D9022AEE16600A83B79 /* Feedback.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B2C4433D2338BE05006D7C3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65E47D5E22ADB1E600A83B79 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2C443372338BE05006D7C3B;
+			remoteInfo = Cycler;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B2C443442338BE05006D7C3B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B2C443402338BE05006D7C3B /* Cycler.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		65E47D6622ADB1E600A83B79 /* Cycler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cycler.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65E47D6622ADB1E600A83B79 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E47D6922ADB1E600A83B79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65E47D6B22ADB1E600A83B79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		65E47D6D22ADB1E600A83B79 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
@@ -35,10 +61,20 @@
 		65E47D8B22ADF2F000A83B79 /* BoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundView.swift; sourceTree = "<group>"; };
 		65E47D8F22AEB40700A83B79 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		65E47D9022AEE16600A83B79 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		B2C443382338BE05006D7C3B /* Cycler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cycler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2C4433B2338BE05006D7C3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		65E47D6322ADB1E600A83B79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2C4433F2338BE05006D7C3B /* Cycler.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C443352338BE05006D7C3B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -52,9 +88,8 @@
 			isa = PBXGroup;
 			children = (
 				65E47D8F22AEB40700A83B79 /* README.md */,
-				65E47D8E22AEAED100A83B79 /* View */,
-				65E47D8D22AEAEBE00A83B79 /* ViewModel */,
 				65E47D6822ADB1E600A83B79 /* Example */,
+				B2C443392338BE05006D7C3B /* Cycler */,
 				65E47D6722ADB1E600A83B79 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,7 +97,8 @@
 		65E47D6722ADB1E600A83B79 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				65E47D6622ADB1E600A83B79 /* Cycler.app */,
+				65E47D6622ADB1E600A83B79 /* Example.app */,
+				B2C443382338BE05006D7C3B /* Cycler.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,34 +126,66 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		65E47D8D22AEAEBE00A83B79 /* ViewModel */ = {
+		B2C443392338BE05006D7C3B /* Cycler */ = {
 			isa = PBXGroup;
 			children = (
+				B2C443452338BEA2006D7C3B /* Sources */,
+				B2C4433B2338BE05006D7C3B /* Info.plist */,
+			);
+			path = Cycler;
+			sourceTree = "<group>";
+		};
+		B2C443452338BEA2006D7C3B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				65E47D8B22ADF2F000A83B79 /* BoundView.swift */,
 				65E47D8922ADEE7100A83B79 /* ViewModel.swift */,
 				65E47D8722ADC54B00A83B79 /* FeedbackLoop.swift */,
 				65E47D9022AEE16600A83B79 /* Feedback.swift */,
 			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		65E47D8E22AEAED100A83B79 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				65E47D8B22ADF2F000A83B79 /* BoundView.swift */,
-			);
-			path = View;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		B2C443332338BE05006D7C3B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		65E47D6522ADB1E600A83B79 /* Cycler */ = {
+		65E47D6522ADB1E600A83B79 /* Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65E47D7A22ADB1E800A83B79 /* Build configuration list for PBXNativeTarget "Cycler" */;
+			buildConfigurationList = 65E47D7A22ADB1E800A83B79 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
 				65E47D6222ADB1E600A83B79 /* Sources */,
 				65E47D6322ADB1E600A83B79 /* Frameworks */,
 				65E47D6422ADB1E600A83B79 /* Resources */,
+				B2C443442338BE05006D7C3B /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B2C4433E2338BE05006D7C3B /* PBXTargetDependency */,
+			);
+			name = Example;
+			productName = Cycler;
+			productReference = 65E47D6622ADB1E600A83B79 /* Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B2C443372338BE05006D7C3B /* Cycler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2C443412338BE05006D7C3B /* Build configuration list for PBXNativeTarget "Cycler" */;
+			buildPhases = (
+				B2C443332338BE05006D7C3B /* Headers */,
+				B2C443342338BE05006D7C3B /* Sources */,
+				B2C443352338BE05006D7C3B /* Frameworks */,
+				B2C443362338BE05006D7C3B /* Resources */,
 			);
 			buildRules = (
 			);
@@ -125,8 +193,8 @@
 			);
 			name = Cycler;
 			productName = Cycler;
-			productReference = 65E47D6622ADB1E600A83B79 /* Cycler.app */;
-			productType = "com.apple.product-type.application";
+			productReference = B2C443382338BE05006D7C3B /* Cycler.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -139,6 +207,9 @@
 				ORGANIZATIONNAME = "Anders Ha";
 				TargetAttributes = {
 					65E47D6522ADB1E600A83B79 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					B2C443372338BE05006D7C3B = {
 						CreatedOnToolsVersion = 11.0;
 					};
 				};
@@ -156,7 +227,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				65E47D6522ADB1E600A83B79 /* Cycler */,
+				65E47D6522ADB1E600A83B79 /* Example */,
+				B2C443372338BE05006D7C3B /* Cycler */,
 			);
 		};
 /* End PBXProject section */
@@ -172,6 +244,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2C443362338BE05006D7C3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -179,18 +258,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65E47D8822ADC54B00A83B79 /* FeedbackLoop.swift in Sources */,
 				65E47D6A22ADB1E600A83B79 /* AppDelegate.swift in Sources */,
-				65E47D8C22ADF2F000A83B79 /* BoundView.swift in Sources */,
-				65E47D8A22ADEE7100A83B79 /* ViewModel.swift in Sources */,
 				65E47D8222ADBD4E00A83B79 /* CounterViewModel.swift in Sources */,
 				65E47D6C22ADB1E600A83B79 /* SceneDelegate.swift in Sources */,
-				65E47D9122AEE16600A83B79 /* Feedback.swift in Sources */,
 				65E47D6E22ADB1E600A83B79 /* CounterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B2C443342338BE05006D7C3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2C443472338BF32006D7C3B /* ViewModel.swift in Sources */,
+				B2C443482338BF32006D7C3B /* FeedbackLoop.swift in Sources */,
+				B2C443492338BF32006D7C3B /* Feedback.swift in Sources */,
+				B2C443462338BF32006D7C3B /* BoundView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B2C4433E2338BE05006D7C3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2C443372338BE05006D7C3B /* Cycler */;
+			targetProxy = B2C4433D2338BE05006D7C3B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		65E47D7422ADB1E800A83B79 /* LaunchScreen.storyboard */ = {
@@ -321,6 +415,7 @@
 		65E47D7B22ADB1E800A83B79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "Example/Preview\\ Content";
@@ -332,7 +427,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andersha.Cycle.Cycler;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Example;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -341,6 +436,7 @@
 		65E47D7C22ADB1E800A83B79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "Example/Preview\\ Content";
@@ -352,9 +448,63 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andersha.Cycle.Cycler;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Example;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B2C443422338BE05006D7C3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = BYSBHXM2D6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Cycler/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.andersha.Cycle.Cycler.Cycler;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B2C443432338BE05006D7C3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = BYSBHXM2D6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Cycler/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.andersha.Cycle.Cycler.Cycler;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -370,11 +520,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65E47D7A22ADB1E800A83B79 /* Build configuration list for PBXNativeTarget "Cycler" */ = {
+		65E47D7A22ADB1E800A83B79 /* Build configuration list for PBXNativeTarget "Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				65E47D7B22ADB1E800A83B79 /* Debug */,
 				65E47D7C22ADB1E800A83B79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2C443412338BE05006D7C3B /* Build configuration list for PBXNativeTarget "Cycler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2C443422338BE05006D7C3B /* Debug */,
+				B2C443432338BE05006D7C3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

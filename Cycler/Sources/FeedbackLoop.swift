@@ -2,17 +2,17 @@ import Combine
 import Dispatch
 import Foundation
 
-open class FeedbackLoop<State, Event, Action>: ViewModel {
+open class FeedbackLoop<S, E, A>: ViewModel {
     public enum Input {
         /// A feedback has emitted an event.
-        case event(Event)
+        case event(E)
 
         /// An API consumer has triggered an action.
-        case action(Action)
+        case action(A)
 
         /// A publicly writable property of the state has been updated by a value
         /// supplied by an API consumer.
-        case updated(PartialKeyPath<State>)
+        case updated(PartialKeyPath<S>)
     }
 
     public struct Output {
@@ -20,20 +20,20 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
         public let input: Input?
 
         /// The state after having processed `input`.
-        public let state: State
+        public let state: S
 
-        public init(state: State, input: Input?) {
+        public init(state: S, input: Input?) {
             self.input = input
             self.state = state
         }
     }
 
-    @StatePublished public var state: State
+    @StatePublished public var state: S
 
     public let objectWillChange: PassthroughSubject<Void, Never>
 
     private let outputSubject: CurrentValueSubject<Output, Never>
-    private let reduce: (inout State, Input) -> Void
+    private let reduce: (inout S, Input) -> Void
 
     // NOTE: Beyond initialization, all inputs must be processed on `queue`.
     private let queue: DispatchQueue
@@ -41,8 +41,8 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
     private var disposables = Set<AnyCancellable>()
 
     public init(
-        initial: State,
-        reduce: @escaping (inout State, Input) -> Void,
+        initial: S,
+        reduce: @escaping (inout S, Input) -> Void,
         feedbacks: [Feedback] = [],
         usesMainQueue: Bool = true,
         qos: DispatchQoS = .default
@@ -80,17 +80,17 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
         queue.setSpecific(key: specificKey, value: nil)
     }
 
-    public func perform(_ action: Action) {
+    public func perform(_ action: A) {
         process(.action(action)) { _ in }
     }
 
-    public func update<U>(_ value: U, for keyPath: WritableKeyPath<State, U>) {
+    public func update<U>(_ value: U, for keyPath: WritableKeyPath<S, U>) {
         process(.updated(keyPath)) {
             $0[keyPath: keyPath] = value
         }
     }
 
-    private func process(_ input: Input, willReduce: @escaping (inout State) -> Void) {
+    private func process(_ input: Input, willReduce: @escaping (inout S) -> Void) {
         func execute() {
             var state = outputSubject.value.state
             willReduce(&state)
@@ -108,11 +108,11 @@ open class FeedbackLoop<State, Event, Action>: ViewModel {
 
     @propertyWrapper
     public struct StatePublished {
-        public var wrappedValue: State {
+        public var wrappedValue: S {
             _read { yield subject.value.state }
         }
 
-        public var publisher: AnyPublisher<State, Never> {
+        public var publisher: AnyPublisher<S, Never> {
             return subject.map { $0.state }.eraseToAnyPublisher()
         }
 

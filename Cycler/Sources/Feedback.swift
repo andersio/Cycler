@@ -2,10 +2,10 @@ import Combine
 
 extension FeedbackLoop {
     public struct Feedback {
-        public let effects: (AnyPublisher<Output, Never>) -> AnyPublisher<Event, Never>
+        public let effects: (AnyPublisher<Output, Never>) -> AnyPublisher<E, Never>
 
         public init(
-            effects: @escaping (AnyPublisher<Output, Never>) -> AnyPublisher<Event, Never>
+            effects: @escaping (AnyPublisher<Output, Never>) -> AnyPublisher<E, Never>
         ) {
             self.effects = { effects($0) }
         }
@@ -25,8 +25,8 @@ extension FeedbackLoop {
         public static func skippingRepeated<U: Equatable, Events: Publisher>(
             _ transform: @escaping (Output) -> U?,
             effect: @escaping (U) -> Events
-        ) -> Feedback where Events.Output == Event, Events.Failure == Never {
-            return Feedback { output -> AnyPublisher<Event, Never> in
+        ) -> Feedback where Events.Output == E, Events.Failure == Never {
+            return Feedback { output -> AnyPublisher<E, Never> in
                 return output
                     .map(transform)
                     .removeDuplicates()
@@ -39,12 +39,12 @@ extension FeedbackLoop {
         public static func positiveEdgeTrigger<Events: Publisher>(
             _ predicate: @escaping (Output) -> Bool,
             effect: @escaping (Output) -> Events
-        ) -> Feedback where Events.Output == Event, Events.Failure == Never {
-            return Feedback { output -> AnyPublisher<Event, Never> in
+        ) -> Feedback where Events.Output == E, Events.Failure == Never {
+            return Feedback { output -> AnyPublisher<E, Never> in
                 var last = false
 
                 return output
-                    .compactMap { output -> AnyPublisher<Event, Never>? in
+                    .compactMap { output -> AnyPublisher<E, Never>? in
                         let current = predicate(output)
                         defer { last = current }
 
@@ -64,8 +64,8 @@ extension FeedbackLoop {
 
         public static func systemBootstrapped<Events: Publisher>(
             effect: @escaping () -> Events
-        ) -> Feedback where Events.Output == Event, Events.Failure == Never {
-            return Feedback { output -> AnyPublisher<Event, Never> in
+        ) -> Feedback where Events.Output == E, Events.Failure == Never {
+            return Feedback { output -> AnyPublisher<E, Never> in
                 return output
                     .filter { $0.input == nil }
                     .first()

@@ -1,9 +1,10 @@
 import SwiftUI
 import Combine
+import Cycler
 
 protocol CounterViewModelProtocol: ViewModel
-    where State == CounterViewModel.State,
-          Action == CounterViewModel.Action {}
+    where S == CounterViewModel.State,
+          A == CounterViewModel.Action {}
 
 enum ViewLibrary {
     static func counter<ViewModel: CounterViewModelProtocol>(_ vm: ViewModel) -> some View {
